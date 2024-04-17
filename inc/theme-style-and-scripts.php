@@ -8,6 +8,7 @@
 function theme_scripts_and_styles() {
   // -- Стили CSS
   wp_enqueue_style( 'swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css?_v=20240320102149', array(), '1.00' );
+  wp_enqueue_style( 'custom-css', get_template_directory_uri() . '/css/custom.css', array(), '1.00' );
   wp_enqueue_style( 'main-css', get_template_directory_uri() . '/css/style.min.css', array(), '1.00' );
 
 

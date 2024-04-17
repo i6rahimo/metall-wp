@@ -1,9 +1,6 @@
 <?php 
 
-/*
-Template Name: Главная страница
-Template Post Type: post, page, product
-*/
+
 ?>
 
 <?php get_header(); ?>
