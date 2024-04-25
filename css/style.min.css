@@ -1587,6 +1587,7 @@ html.menu-open .header {
 }
 .tabs__panel.active {
     display: block;
+    width: 100%;
 }
 .accordion__item {
     background-color: #fff;
@@ -3949,6 +3950,7 @@ html.menu-open .header {
     border-radius: 10px;
     width: 100%;
 }
+
 .filter__product-name {
     font-size: 26px;
     font-style: normal;

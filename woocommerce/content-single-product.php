@@ -31,7 +31,8 @@ if ( post_password_required() ) {
 	return;
 }
 ?>
-<div id="product-<?php the_ID(); ?>" <?php wc_product_class( '', $product ); ?>>
+
+<div id="product-<?php the_ID(); ?>" <?php wc_product_class( 'product__wrapper', $product ); ?>>
 
 	<?php
 	/**
@@ -44,6 +45,7 @@ if ( post_password_required() ) {
 	?>
 
 	<div class="summary entry-summary">
+		
 		<?php
 		/**
 		 * Hook: woocommerce_single_product_summary.
@@ -58,6 +60,7 @@ if ( post_password_required() ) {
 		 * @hooked WC_Structured_Data::generate_product_data() - 60
 		 */
 		do_action( 'woocommerce_single_product_summary' );
+		
 		?>
 	</div>
 

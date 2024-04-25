@@ -28,32 +28,23 @@ $columns           = apply_filters( 'woocommerce_product_thumbnails_columns', 4 
 $post_thumbnail_id = $product->get_image_id();
 
 ?>
-
 <div class="product__images">
 	<div class="product__image">
 		<?php
-				foreach( $attachment_ids as $attachment_id ) 
-				{
-				//Get URL of Gallery Images - default wordpress image sizes
-				// echo $Original_image_url = wp_get_attachment_url( $attachment_id );
-				// echo $full_url = wp_get_attachment_image_src( $attachment_id, 'full' )[0];
-				// echo $medium_url = wp_get_attachment_image_src( $attachment_id, 'medium' )[0];
-				// echo $thumbnail_url = wp_get_attachment_image_src( $attachment_id, 'thumbnail' )[0];
-				
-				// //Get URL of Gallery Images - WooCommerce specific image sizes
-				// echo $shop_thumbnail_image_url = wp_get_attachment_image_src( $attachment_id, 'shop_thumbnail' )[0];
-				// echo $shop_catalog_image_url = wp_get_attachment_image_src( $attachment_id, 'shop_catalog' )[0];
-				// echo $shop_single_image_url = wp_get_attachment_image_src( $attachment_id, 'shop_single' )[0];
-
-				}
-				// foreach($productImages as $product) {
-
-				// }
-				// $html  = '<div class="product__image-slide">';
-				// $html .= sprintf( '<img src="%s" alt="%s" class="wp-post-image" />', esc_url( wc_placeholder_img_src() ), esc_html__( 'Awaiting product image', 'customify' ) );
-				// $html .= '</div>';
-				
-				echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', $html, $post_thumbnail_id ); // phpcs:disable WordPress.XSS.EscapeOutput.OutputNotEscaped
+			global $product;
+			$attachment_ids = $product->get_gallery_attachment_ids();
+			foreach( $attachment_ids as $attachment_id ) {
+				?>
+					<div class="product__image-slide">
+					<picture>
+						<source srcset="<?php echo $image_link = wp_get_attachment_url( $attachment_id ); ?>" type="image/webp">
+						<img src="<?php echo $image_link = wp_get_attachment_url( $attachment_id ); ?>" alt="Slide 1">
+					</picture>
+			
+					</div>
+				<?php
+			}
+		echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', $html, $post_thumbnail_id ); // phpcs:disable WordPress.XSS.EscapeOutput.OutputNotEscaped
 		
 		// do_action( 'woocommerce_product_thumbnails' );
 		?>

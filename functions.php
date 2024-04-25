@@ -29,23 +29,21 @@ if ( ! function_exists( 'test_woocommerce_wrapper_before' ) ) {
 		<?php
 	}
 }
-add_action( 'woocommerce_before_main_content', 'test_woocommerce_wrapper_before' );
+// add_action( 'woocommerce_before_main_content', 'test_woocommerce_wrapper_before' );
 
-if ( ! function_exists( 'test_woocommerce_wrapper_after' ) ) {
-	/**
-	 * After Content.
-	 *
-	 * Closes the wrapping divs.
-	 *
-	 * @return void
-	 */
-	function test_woocommerce_wrapper_after() {
-		?>
-			</main>
-		<?php
-	}
-}
-add_action( 'woocommerce_after_main_content', 'test_woocommerce_wrapper_after' );
+// if ( ! function_exists( 'test_woocommerce_wrapper_after' ) ) {
+// 	/**
+// 	 * After Content.
+// 	 *
+// 	 * Closes the wrapping divs.
+// 	 *
+// 	 * @return void
+// 	 */
+// 	function test_woocommerce_wrapper_after() {
+
+// 	}
+// }
+// add_action( 'woocommerce_after_main_content', 'test_woocommerce_wrapper_after' );
 
 
 
@@ -69,7 +67,7 @@ function test_after_content() {
 	$text_character = carbon_get_the_post_meta('text_for_characteristic');
 	$text_deliver = carbon_get_the_post_meta('text_for_deliver');
 	$test = 222;
-    $output = "<div class='tabs tabs__container' data-tabs='tabs-example'>
+    $output = "<div class='tabs' data-tabs='tabs-example'>
 	<div class='tabs__nav'>
 		<button class='tabs__trigger' type='button'>Описание</button>
 		<button class='tabs__trigger' type='button'>Характеристика</button>
@@ -91,3 +89,92 @@ function test_after_content() {
     echo $output;
 }
 
+
+ 
+
+add_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
+add_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
+add_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 ); 
+
+add_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
+
+
+remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loop_price');
+remove_action('woocommerce_before_shop_loop_item_title','woocommerce_template_loop_product_thumbnail');
+
+
+
+add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+function woocommerce_template_loop_add_to_cart() {
+	echo '<a  class="filter__product-btn">
+	Подробнее
+	<svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M9.16667 1L15 7M15 7L9.16667 13M15 7L1 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+	</svg> 
+	</a>'
+;
+}
+
+ 
+
+
+
+
+
+
+
+add_filter( 'woocommerce_product_single_add_to_cart_text', 'woocommerce_add_to_cart_button_text_single' ); 
+function woocommerce_add_to_cart_button_text_single() {
+    return __( 'Добавить в заказ', 'woocommerce' ); 
+}
+
+add_action('add_svg_for_btn', 'add_svg_btn'); 
+
+function add_svg_btn() {
+	echo '<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path d="M9 1L14 7M14 7L9 13M14 7H1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg> ';
+}
+
+
+add_filter( 'woocommerce_quantity_input_classes', 'metall_woocommerce_quantity_input_classes_filter', 10, 2 );
+
+/**
+ * Function for `woocommerce_quantity_input_classes` filter-hook.
+ * 
+ * @param  $array   
+ * @param  $product 
+ *
+ * @return 
+ */
+function metall_woocommerce_quantity_input_classes_filter( $array, $product ){
+
+	return 'product__quantity-result';
+}
+
+
+add_filter( 'woocommerce_product_tabs', 'woo_remove_product_tabs', 10 );
+function woo_remove_product_tabs( $tabs ) {
+
+unset( $tabs['description'] );      	// Remove the description tab
+unset($tabs['reviews']);    
+$tabs['additional_information'] ;      	
+
+
+return $tabs;
+}
+
+
+add_action('woocommerce_before_shop_loop', 'filter_products_shop_page');
+function filter_products_shop_page() {
+	require_once( get_template_directory() . '/inc/wc/filter-sidebar.php' );
+}
+
+add_action('woocommerce_before_single_product', 'main_class_before_content');
+function main_class_before_content() {
+	echo "<main class='page page__container'>";
+}
+
+add_action('woocommerce_before_add_to_cart_form', 'test_before_cart');
+function test_before_cart() {
+}

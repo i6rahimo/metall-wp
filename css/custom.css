@@ -1,3 +1,41 @@
 .tabs {
     margin: 0;   
 }
+.page-category {
+    width: 100%;
+
+}
+
+.filter__product a {
+    color: #fff;
+
+}
+.filter__product li {
+    display: flex;
+    justify-content: space-between;
+}
+.product_meta {
+    display: none;
+}
+.woocommerce-product-details__short-description {
+    display: none;
+}
+
+.woocommerce-result-count {
+    display: none;
+}
+.woocommerce-ordering {
+    display: none;
+}
+.woocommerce-notices-wrapper {
+    display: none;
+}
+
+
+.filter__item.active .filter__content{
+    height: auto;
+}
+.filter__item.open .filter__content {
+    height: 0;
+    display: none;
+}
