@@ -31,6 +31,7 @@ if ( ! empty( $breadcrumb ) ) {
 	foreach ( $breadcrumb as $key => $crumb ) {
 		echo $before;
 		echo '<li class="breadcrumbs__li">';
+		
 		if ( ! empty( $crumb[1] ) && sizeof( $breadcrumb ) !== $key + 1 ) {
 
 			echo '

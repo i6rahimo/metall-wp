@@ -65,18 +65,21 @@ if ( woocommerce_product_loop() ) {
 	<?php
 	woocommerce_product_loop_start();
 
-	if ( wc_get_loop_prop( 'total' ) ) {
-		while ( have_posts() ) {
-			the_post();
+	if(! is_shop()) {
+
+		if ( wc_get_loop_prop( 'total' ) ) {
+			while ( have_posts() ) {
+				the_post();
 			
-			/**
-			 * Hook: woocommerce_shop_loop.
-			 */
-
+				/**
+				 * Hook: woocommerce_shop_loop.
+				 */
+				
 				wc_get_template_part( 'content', 'product' );
-
-
-			do_action( 'woocommerce_shop_loop' );
+				
+				
+				do_action( 'woocommerce_shop_loop' );
+			}
 		}
 	}
 
@@ -99,7 +102,7 @@ if ( woocommerce_product_loop() ) {
 }
 ?>
 </div>
-</div>
+</div> 
 </main>
 <?php
 /**

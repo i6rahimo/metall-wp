@@ -167,7 +167,9 @@ return $tabs;
 
 add_action('woocommerce_before_shop_loop', 'filter_products_shop_page');
 function filter_products_shop_page() {
-	require_once( get_template_directory() . '/inc/wc/filter-sidebar.php' );
+	if(! is_shop()) {
+		require_once( get_template_directory() . '/inc/wc/filter-sidebar.php' );
+	}
 }
 
 add_action('woocommerce_before_single_product', 'main_class_before_content');
@@ -177,4 +179,43 @@ function main_class_before_content() {
 
 add_action('woocommerce_before_add_to_cart_form', 'test_before_cart');
 function test_before_cart() {
+}
+
+
+
+
+add_action('woocommerce_product_loop_end', 'woocust');
+
+function woocust() {
+	global $product;
+	$woocommerce_category_id = get_queried_object_id();
+
+	$get_categories = get_terms('product_cat', [
+		'orderby' => 'id',
+		'order' => 'ASC',
+		'hide_empty' => 1,
+	]);
+	// is_product_category
+	if ( is_shop() ) {
+	  if ( $get_categories ) {
+		echo '<div class="">';
+			echo '<div class="subcatalog__items">';
+			foreach ( $get_categories as $term ) {
+			  echo '<div class="subcatalog__item">';
+			  echo '<div class="subcatalog__item-img">';
+			  echo '<a href="' .  esc_url( get_term_link( $term ) ) . '" class="subcatalog__item-href ' . $term->slug . '">';
+			//   woocommerce_subcategory_thumbnail( $term );
+			  echo '</a>';
+			  echo '<p class="subcatalog__item-name">';
+			  echo $term->name;
+			  echo '</p>';
+
+			  echo '</div>';
+			  echo '</div>';
+		  }
+		  echo '</div>';
+		  echo '</div>';
+
+		}
+	}
 }
