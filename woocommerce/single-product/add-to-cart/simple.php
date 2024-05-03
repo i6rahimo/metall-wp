@@ -35,11 +35,7 @@ if ( $product->is_in_stock() ) : ?>
 		<?php
 		do_action( 'woocommerce_before_add_to_cart_quantity' );
 		echo '<div class="product__quantity">';
-		echo '<div class="product__quantity-left">
-				<svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M5 9L1 5L5 1" stroke="#181818" stroke-linecap="round" stroke-linejoin="round"></path>
-				</svg> 
-			  </div>';
+
 		woocommerce_quantity_input(
 			array(
 				'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
@@ -47,11 +43,7 @@ if ( $product->is_in_stock() ) : ?>
 				'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( wp_unslash( $_POST['quantity'] ) ) : $product->get_min_purchase_quantity(), // WPCS: CSRF ok, input var ok.
 			)
 		);
-		echo '<div class="product__quantity-right">
-				<svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M1 9L5 5L1 1" stroke="#181818" stroke-linecap="round" stroke-linejoin="round"></path>
-				</svg> 
-			 </div>';
+
 		echo '</div>';
 		do_action( 'woocommerce_after_add_to_cart_quantity' );
 		?>

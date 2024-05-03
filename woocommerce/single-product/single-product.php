@@ -52,6 +52,8 @@ get_header(  ); ?>
 
 	?>
 
+
+	?>
 	<?php
 		/**
 		 * woocommerce_sidebar hook.

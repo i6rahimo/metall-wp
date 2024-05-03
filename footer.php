@@ -343,64 +343,10 @@
         </div>
     </div>
 </div>
-
-<div class="popup" data-popup="popup-4" data-close-overlay>
-    <div class="popup__wrapper" data-close-overlay>
-        <div class="poup__content-close">
-            <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="45" height="45" rx="22.5" fill="#F1F1F1" />
-                <path d="M29 16L17 28M29 28L17 16" stroke="#181818" stroke-width="2" stroke-linecap="round" />
-            </svg>
-        </div>
-        <div class="popup__content cart__content">
-
-            <div class="popup__cart">
-                <h2 class="popup__cart-title">Вы добавили в заявку:</h2>
-                <div class="popup__cart-wrapper">
-
-
-                </div>
-                <div class="popup__cart-phone">
-                    <p>Если у вас есть срочный вопрос, <br> позвоните по телефону:</p>
-                    <a href="tel:+7 (495) 255-32-12">+7 (495) 255-32-12</a>
-                </div>
-            </div>
-
-            <div class="cart__form">
-                <div class="cart__form-wrapper">
-                    <h2 class="cart__form-title">Заполните форму, чтобы мы могли
-                        <span class="orange__text">получить заявку</span>
-                    </h2>
-                    <h3 class="cart__form-subtitle">Вышлем вам несколько вариантов КП в течение 42 минут</h3>
-                    <form action="" class="popup__form">
-                        <label for="" class="popup__form-label">
-                            <input type="text" class="popup__form-input cart__form-input"
-                                placeholder="Укажите ИНН организации">
-                        </label>
-                        <label for="" class="popup__form-label">
-                            <input type="text" class="popup__form-input cart__form-input"
-                                placeholder="Укажите телефон для связи">
-                        </label>
-                        <button class="btn popup__form-btn cart__form-btn">
-                            Отправить заявку
-                            <svg width="17" height="14" viewBox="0 0 17 14" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9.66667 1L15.5 7M15.5 7L9.66667 13M15.5 7L1.5 7" stroke="white"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </button>
-                        <p class="popup__form-politic cart__form-politic">
-                            Нажимая на кнопку, вы даёте согласие на обработку персональных данных в соответствии <a
-                                href="#">с Политикой конфиденциальности</a>
-                        </p>
-                    </form>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
+<!-- Подключение корзины -->
+<?php
+require_once( get_template_directory() . '/cart-popup.php' );
+?>
 
 <div class="popup filter__mobile-popup" data-popup="popup-5" data-close-overlay>
     <div class="popup__wrapper filter__popup-wrapper" data-close-overlay>
