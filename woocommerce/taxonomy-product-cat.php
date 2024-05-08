@@ -18,5 +18,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
-echo " test";
+if(is_tax()) {
+	echo "is tax";
+}
 wc_get_template( 'archive-product.php' );

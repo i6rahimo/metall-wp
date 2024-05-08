@@ -13,7 +13,7 @@ function custom_price()
 
 
 // ТАБЫ
-add_action('woocommerce_after_main_content', 'test_after_content');
+add_action('woocommerce_after_single_product', 'test_after_content', 2);
 function test_after_content()
 {
 	$text_desc = carbon_get_the_post_meta('text_for_desc');
@@ -142,84 +142,87 @@ function add_svg_btn()
 
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
 
-add_action('woocommerce_after_single_product', 'woocommerce_output_related_productss', 8);
+add_action('woocommerce_after_single_product', 'woocommerce_output_related_productss', 5);
 
-function woocommerce_output_related_productss() {
+
+function woocommerce_output_related_productss()
+{
 	add_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail');
 
-	if ( ! defined( 'ABSPATH' ) ) {
+	if (!defined('ABSPATH')) {
 		exit;
 	}
 	global $product;
 	$product_per_page = 4;
-	$related_products = array_filter( array_map( 'wc_get_product', wc_get_related_products( $product->get_id(), $product_per_page, $product->get_upsell_ids() ) ), 'wc_products_array_filter_visible' );
-	$related_products = wc_products_array_orderby( $related_products, 'rand', 'desc' );
-	$link = apply_filters( 'woocommerce_loop_product_link', get_the_permalink(), $product );
-	if ( $related_products ) : ?>
-	
-		<section class="related products">
-	
-			<?php
-			$heading = apply_filters( 'woocommerce_product_related_products_heading similar__title', __( 'Похожие товары', 'woocommerce' ) );
-	
-			if ( $heading ) :
-				?>
-				<h2 class="similar__title"><?php echo esc_html( $heading ); ?></h2>
-			<?php endif; ?>
-			
+	$related_products = array_filter(array_map('wc_get_product', wc_get_related_products($product->get_id(), $product_per_page, $product->get_upsell_ids())), 'wc_products_array_filter_visible');
+	$related_products = wc_products_array_orderby($related_products, 'rand', 'desc');
+	$link = apply_filters('woocommerce_loop_product_link', get_the_permalink(), $product);
+	if ($related_products): ?>
 
-				<div class="similar__products">
+		<section class="related products">
+
+			<?php
+			$heading = apply_filters('woocommerce_product_related_products_heading similar__title', __('Похожие товары', 'woocommerce'));
+
+			if ($heading):
+				?>
+				<h2 class="similar__title"><?php echo esc_html($heading); ?></h2>
+			<?php endif; ?>
+
+
+			<div class="similar__products">
 				<div class="similar__products-wrapper">
 
-					<?php foreach ( $related_products as $related_product ) : ?>
+					<?php foreach ($related_products as $related_product): ?>
 
 						<div class="similar__product">
 
 							<?php
-								$post_object = get_post( $related_product->get_id() );
-								
-								setup_postdata( $GLOBALS['post'] =& $post_object );
+							$post_object = get_post($related_product->get_id());
 
-								$image_url = $related_product->get_image_id();
+							setup_postdata($GLOBALS['post'] =& $post_object);
 
-								?>
-								<div class="similar__img">
+							$image_url = $related_product->get_image_id();
 
-									<?php
-										 echo wp_get_attachment_image($image_url);
-									?>
-			                	</div>
-								<div class="similar__product-text">
-									 <h2 class="similar__product-name">  <?php echo get_the_title()  ?></h2>
-									 <p class="similar__characteristics-title">Характеристики:</p>
-									 <?php $product->list_attributes(); ?>
-									 <div class="similar__product-prices">
-										<p class="similar__product-price_name">Цена</p>
-										<?php if ( $price_html = $product->get_price_html() ) : ?>
-											<span class="price"><?php echo $price_html; ?></span>
-										<?php endif; ?>
+							?>
+							<div class="similar__img">
 
-                                	</div>
-									<a href="<?php echo esc_url($link);?>" class="btn similar-btn similar__product-btn">
-                                    Подробнее
-										<svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M9.5 1L14.5 7M14.5 7L9.5 13M14.5 7H1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-										</svg> 
-									</a>
-								</div>
 								<?php
-								// wc_get_template_part( 'content', 'product' );
+								echo wp_get_attachment_image($image_url);
+								?>
+							</div>
+							<div class="similar__product-text">
+								<h2 class="similar__product-name"> <?php echo get_the_title() ?></h2>
+								<p class="similar__characteristics-title">Характеристики:</p>
+								<?php $product->list_attributes(); ?>
+								<div class="similar__product-prices">
+									<p class="similar__product-price_name">Цена</p>
+									<?php if ($price_html = $product->get_price_html()): ?>
+										<span class="price"><?php echo $price_html; ?></span>
+									<?php endif; ?>
+
+								</div>
+								<a href="<?php echo esc_url($link); ?>" class="btn similar-btn similar__product-btn">
+									Подробнее
+									<svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M9.5 1L14.5 7M14.5 7L9.5 13M14.5 7H1.5" stroke="white" stroke-width="2"
+											stroke-linecap="round" stroke-linejoin="round"></path>
+									</svg>
+								</a>
+							</div>
+							<?php
+							// wc_get_template_part( 'content', 'product' );
 							?>
 						</div>
-	
-				<?php endforeach; ?>
+
+					<?php endforeach; ?>
+				</div>
 			</div>
-			</div>
-	
-		</section> 
+
+		</section>
 		<?php
 	endif;
-	
+
 	wp_reset_postdata();
 }
 
@@ -231,6 +234,13 @@ function woocommerce_output_related_productss() {
 
 
 
+add_action('woocommerce_after_single_product', 'single_product_form', 7);
+
+function single_product_form()
+{
+	require_once (get_template_directory() . '/inc/wc/single-product-form.php');
+
+}
 
 
 
@@ -239,10 +249,9 @@ function woocommerce_output_related_productss() {
 
 
 
+// add_filter( 'woocommerce_product_single_add_to_cart_text', 'bbloomer_custom_add_cart_button_single_product', 9999 );
 
-	// add_filter( 'woocommerce_product_single_add_to_cart_text', 'bbloomer_custom_add_cart_button_single_product', 9999 );
-
-	// function bbloomer_custom_add_cart_button_single_product( $label ) {
+// function bbloomer_custom_add_cart_button_single_product( $label ) {
 //    if ( WC()->cart && ! WC()->cart->is_empty() ) {
 //       foreach( WC()->cart->get_cart() as $cart_item_key => $values ) {
 //          $product = $values['data'];
@@ -255,12 +264,12 @@ function woocommerce_output_related_productss() {
 //    return $label;
 // }
 
-	// // Part 2
+// // Part 2
 // // Loop Pages Add to Cart
 
-	// add_filter( 'woocommerce_product_add_to_cart_text', 'bbloomer_custom_add_cart_button_loop', 9999, 2 );
+// add_filter( 'woocommerce_product_add_to_cart_text', 'bbloomer_custom_add_cart_button_loop', 9999, 2 );
 
-	// function bbloomer_custom_add_cart_button_loop( $label, $product ) {
+// function bbloomer_custom_add_cart_button_loop( $label, $product ) {
 //    if ( $product->get_type() == 'simple' && $product->is_purchasable() && $product->is_in_stock() ) {
 //       if ( WC()->cart && ! WC()->cart->is_empty() ) {
 //          foreach( WC()->cart->get_cart() as $cart_item_key => $values ) {
@@ -274,4 +283,21 @@ function woocommerce_output_related_productss() {
 //    }
 //    return $label;
 // }
-	?>
+
+
+
+
+add_action('woocommerce_before_single_product', 'main_class_before_content');
+function main_class_before_content()
+{
+	echo "<main class='page page__container'>";
+}
+
+add_action('woocommerce_after_single_product', 'main_class_after_content');
+function main_class_after_content()
+{
+	echo "</main>";
+}
+
+remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar');
+?>

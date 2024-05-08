@@ -2012,7 +2012,7 @@ html.menu-open .header {
     flex-wrap: wrap;
     gap: 40px;
 }
-.no-webp .products__item:nth-child(1) .products__item-img {
+/* .no-webp .products__item:nth-child(1) .products__item-img {
     background-image: url(../images/pr1.png);
 }
 .no-webp .products__item:nth-child(2) .products__item-img {
@@ -2029,7 +2029,7 @@ html.menu-open .header {
 }
 .no-webp .products__item:nth-child(6) .products__item-img {
     background-image: url(../images/pr6.png);
-}
+} */
 .products__item-href {
     position: absolute;
     top: 0;
@@ -3334,7 +3334,7 @@ html.menu-open .header {
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
-.no-webp .subcatalog__item:nth-child(1) .subcatalog__item-img {
+/* .no-webp .subcatalog__item:nth-child(1) .subcatalog__item-img {
     background-image: url(../images/pr1.png);
 }
 .subcatalog__item:nth-child(1) .subcatalog__item-img {
@@ -3384,7 +3384,7 @@ html.menu-open .header {
 }
 .no-webp .subcatalog__item:nth-child(7) .subcatalog__item-img {
     background-image: url(../images/pr2.png);
-}
+} */
 .subcatalog__item:nth-child(7) .subcatalog__item-img {
     background-position: center;
     background-size: cover;
@@ -5313,7 +5313,7 @@ html.menu-open .header {
         z-index: -1;
     }
 }
-.webp .products__item:nth-child(1) .products__item-img {
+/* .webp .products__item:nth-child(1) .products__item-img {
     background-image: url(../images/pr1.webp);
 }
 .webp .products__item:nth-child(2) .products__item-img {
@@ -5339,8 +5339,8 @@ html.menu-open .header {
 }
 .webp .shipment__hero {
     background-image: url(../images/shipment-bg.webp);
-}
-.webp .subcatalog__item:nth-child(1) .subcatalog__item-img {
+} */
+/* .webp .subcatalog__item:nth-child(1) .subcatalog__item-img {
     background-image: url(../images/pr1.webp);
 }
 .webp .subcatalog__item:nth-child(2) .subcatalog__item-img {
@@ -5360,7 +5360,7 @@ html.menu-open .header {
 }
 .webp .subcatalog__item:nth-child(7) .subcatalog__item-img {
     background-image: url(../images/pr2.webp);
-}
+} */
 .webp .reviews__wrapper {
     background-image: url(../images/review-bg.webp);
 }
