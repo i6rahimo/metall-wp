@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="shortcut icon" href="<?php echo get_template_directory_uri() ?>/images/logo.svg" type="image/x-icon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css?_v=20240320102149">
-  <title>Главная</title>
+  <title><?php  wp_title(); ?></title>
   <?php wp_head(); ?>
 </head>
 <body>
@@ -33,13 +33,13 @@
           <path d="M1 11.1703L1 14.2438C1 14.7095 1.19754 15.1562 1.54917 15.4856C1.90081 15.815 2.37772 16 2.875 16H14.125C14.6223 16 15.0992 15.815 15.4508 15.4856C15.8025 15.1562 16 14.7095 16 14.2438V11.1703M8.50105 1V10.9521M8.50105 10.9521L12.7868 7.14941M8.50105 10.9521L4.21533 7.14941" stroke="#FB7A32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg> 
       </button>
-      <div class="header__main-search">
+      <form method="post" action="<?php esc_url( home_url('/') ); ?>" class="header__main-search">
         <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M14.4855 14.6L18 18M16.8667 8.93333C16.8667 13.3148 13.3148 16.8667 8.93333 16.8667C4.55187 16.8667 1 13.3148 1 8.93333C1 4.55187 4.55187 1 8.93333 1C13.3148 1 16.8667 4.55187 16.8667 8.93333Z" stroke="#9D9D9C" stroke-width="2" stroke-linecap="round"/>
         </svg> 
-        <input type="" placeholder="Искать в каталоге" data-type="popup-search">
-
-      </div>
+        <input value="<?php get_search_query( ); ?>" type="" name="s" placeholder="Искать в каталоге" data-type="popup-search">
+        <div class="search-result"></div>
+      </form>
       <a href="tel:+79669372311" class="header__main-tel">+7 966 937-23-11</a>
       <div class="header__cart-wrapper" data-type="popup-4">
         <div class="header__main-cart" data-type="popup-4">
@@ -50,7 +50,7 @@
 </button>
       </div>
     </div>
-    
+
     <!-- <nav class="header__menu menu"> 
       <ul class="menu__list">
         <li class="menu__item"><a href="../about-page.html" class="menu__link">О компании</a></li>

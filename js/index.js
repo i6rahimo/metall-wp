@@ -4,7 +4,7 @@ const accordionItems = document.querySelectorAll('.accordion__item');
 
 accordionItems.forEach((e) => {
     e.classList.add('active');
-    console.log(e);
+
 })
 
 
@@ -20,3 +20,23 @@ secondLink.forEach((e, index) => {
     </svg> `)
     }
 })
+
+function inputChecked() {
+    const inputs = document.querySelectorAll('.filter__label');
+
+    inputs.forEach((e) => {
+        e.addEventListener('click', (event)=> {
+            let target = event.currentTarget;
+            let labelBtn = target.querySelector('.filter__button');
+            labelBtn.classList.add('active');
+            if(labelBtn.classList.contains('active')) {
+                console.log('yes');
+            }
+            localStorage.setItem('addedClass',labelBtn );
+        })
+    })
+}
+
+inputChecked()
+
+

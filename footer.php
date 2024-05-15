@@ -325,19 +325,6 @@
         <div class="popup__content popup__content-search">
             <div class="popup__body">
                 <div class="header__search-get">
-                    <div class="header__search-item">
-                        <a href="">Арматура А500с 6 мм сталь 3 ТУ 14-1-5254-94</a>
-                    </div>
-                    <div class="header__search-item">
-                        <a href="">Арматура А500с 6 мм сталь 3 ТУ 14-1-5254-94</a>
-                    </div>
-                    <div class="header__search-item">
-                        <a href="">Арматура А500с 6 мм сталь 3 ТУ 14-1-5254-94</a>
-                    </div>
-                    <div class="header__search-item">
-                        <a href="">Арматура А500с 6 мм сталь 3 ТУ 14-1-5254-94</a>
-                    </div>
-
                 </div>
             </div>
         </div>

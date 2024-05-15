@@ -65,13 +65,10 @@ if ( woocommerce_product_loop() ) {
 	?>
 	<?php
 	woocommerce_product_loop_start();
-
 	if(! is_shop()) {
-
 		if ( wc_get_loop_prop( 'total' ) ) {
 			while ( have_posts() ) {
 				the_post();
-			
 				/**
 				 * Hook: woocommerce_shop_loop.
 				 */
@@ -80,11 +77,15 @@ if ( woocommerce_product_loop() ) {
 				
 				
 				do_action( 'woocommerce_shop_loop' );
+
+				
 			}
 		}
+
 	}
-
-
+		else {
+		wc_get_template_part( 'content', 'product-shop' );
+	}
 	woocommerce_product_loop_end();
 
 	/**
