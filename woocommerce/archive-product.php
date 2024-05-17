@@ -65,8 +65,61 @@ if ( woocommerce_product_loop() ) {
 	?>
 	<?php
 	woocommerce_product_loop_start();
+
 	if(! is_shop()) {
-		if ( wc_get_loop_prop( 'total' ) ) {
+
+		if(is_product_category()) {
+
+				$current_slug = get_queried_object();
+				
+
+				$term_id  = get_queried_object_id();
+				$taxonomy = 'product_cat';
+
+				$terms    = get_terms([
+					'taxonomy'    => $taxonomy,
+					'hide_empty'  => true,
+					'parent'      => $current_slug->term_id,
+					'hide_empty' => false,
+				]);
+				?>
+				<div class="subcatalog__items">
+				<?php
+				foreach($terms as $subcatalog) {
+					$link = get_term_link( $subcatalog, 'product_cat' );
+					$woocommerce_category_id = get_queried_object_id();
+					?>
+
+					<div class="subcatalog__item">
+						<div class="subcatalog__item-img">
+							<div class="subcatalog__item-img-wrapper">
+								<?php woocommerce_subcategory_thumbnail( $subcatalog ); ?> 
+							</div>
+								<a href="<?php echo $link; ?>" class="subcatalog__item-href">
+								</a>
+								<p class="subcatalog__item-name">
+									<?php  echo $subcatalog->name; ?>
+								</p>
+						</div>
+					</div>
+					<?php
+				} 
+					?>
+				</div>
+				<?php
+	
+
+		} 
+		
+	} 
+	if( wc_get_loop_prop( 'total' ) && is_tax() ) {
+		?>
+		<div class="filter__wrapper">
+		<?php
+			require_once (get_template_directory() . '/inc/wc/filter-sidebar.php');
+				?>
+				<div class="filter__products">
+				<?php
 			while ( have_posts() ) {
 				the_post();
 				/**
@@ -78,14 +131,16 @@ if ( woocommerce_product_loop() ) {
 				
 				do_action( 'woocommerce_shop_loop' );
 
-				
 			}
+			?>
+			</div>
+			</div>
+			<?php
 		}
-
-	}
-		else {
+	if(is_shop()) {
 		wc_get_template_part( 'content', 'product-shop' );
 	}
+
 	woocommerce_product_loop_end();
 
 	/**
@@ -112,13 +167,13 @@ if ( woocommerce_product_loop() ) {
  *
  * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
  */
-// do_action( 'woocommerce_after_main_content' );
+do_action( 'woocommerce_after_main_content' );
 /**
  * Hook: woocommerce_sidebar.
  *
  * @hooked woocommerce_get_sidebar - 10
  */
-// do_action( 'woocommerce_sidebar' );
+do_action( 'woocommerce_sidebar' );
 ?>
 <?php
 get_footer();

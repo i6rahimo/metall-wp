@@ -68,13 +68,13 @@ remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_lo
 
 
 
-add_action('woocommerce_before_shop_loop', 'filter_products_shop_page');
-function filter_products_shop_page()
-{
-	if (!is_shop()) {
-		require_once (get_template_directory() . '/inc/wc/filter-sidebar.php');
-	}
-}
+// add_action('woocommerce_before_shop_loop', 'filter_products_shop_page');
+// function filter_products_shop_page()
+// {
+// 	if (!is_shop() &&  !is_product_category()) {
+// 		require_once (get_template_directory() . '/inc/wc/filter-sidebar.php');
+// 	}
+// }
 
 
 

@@ -31,31 +31,3 @@ function esp_search_ajax_action_callback(){
 	wp_die();
 }
 
-
-
-
-add_action( 'wp_ajax_get_cat', 'ajax_show_posts_in_cat' );
-add_action( 'wp_ajax_nopriv_get_cat', 'ajax_show_posts_in_cat' );
-function ajax_show_posts_in_cat() {
-	
-	$link = ! empty( $_POST['link'] ) ? esc_attr( $_POST['link'] ) : false;
-	if(is_tax()) {
-		echo $link;
-	}
-	$slug = $link ? wp_basename( $link ) : false;
-	$cat  = get_category_by_slug( $slug );
-	
-	if ( ! $cat ) {
-		die( 'Рубрика не найдена' );
-	}
-	
-	query_posts( array(
-		'posts_per_page' => get_option( 'posts_per_page' ),
-		'post_status'    => 'publish',
-		'category_name'   => $cat->slug
-	) );
-	
-	require plugin_dir_path( __FILE__ ) . 'tpl-cat.php';
-	
-	wp_die();
-}

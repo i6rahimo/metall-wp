@@ -17,17 +17,38 @@
             <div class="accordion__header filter__header">Производитель</div>
             <div class="accordion__content filter__content open">
                 <?php
+                    $attributes_tax_slugs = array_keys( wp_list_pluck( wc_get_attribute_taxonomies(), 'attribute_label', 'attribute_name' ) );
+
+                    if ( $attribute_taxonomies = wc_get_attribute_taxonomies() ) {
+                        foreach ( $attribute_taxonomies as $tax ) {
+                            if ( $name = wc_attribute_taxonomy_name( $tax->attribute_name ) ) {
+
+                                $label = ! empty( $tax->attribute_label ) ? $tax->attribute_label : $tax->attribute_name;
+
+                                $wc_product_attributes[ $name ] = $tax; // used as a global elsewhere
+                                
+                                register_taxonomy( 
+                                    $name,
+                                    apply_filters( 'woocommerce_taxonomy_objects_' . $name, array( 'product' ) ),
+                                    apply_filters( 'woocommerce_taxonomy_args_' . $name, array(/* … sane defaults … */) )
+                                );
+                                
+                            }
+                        }
+                    }
                     $args = get_terms([
                         'taxonomy' => 'product_tag',
                         'hide_empty' => false,
                     ]);        
-                    foreach($args as $item):
+             
+                    foreach($attributes_tax_slugs as $item):
+         
                         ?>
                             <!-- <label class="filter__label" for="<?php echo $item->term_id?>">    
-                                <input  class="filter__input" type="submit" name="post_tag" value="<?php echo $item->slug; ?>" id="<?php echo $item->term_id ?>" 
-                                <button  class="filter__button"><?php echo $item->name; ?></button>
+                                <input type="checkbox" name="<?php echo $item->taxonomy; ?>" value="<?php echo $item->slug; ?>" <?php checked( $checked ); ?>/>
+                                <button><?php echo $item->name; ?></button>
                             </label> -->
-                            <a href="?product_tag=<?php echo $item->slug; ?>" class="filter__button"><?php echo $item->name; ?></a>
+                            <a href="<?php echo $item ?>" class="filter__button"><?php echo $item ?></a>
                         <?php
                     endforeach
                 ?>
@@ -42,7 +63,7 @@
         </div>
     </div>
 
-    <div class="accordion filter__accordion">
+    <!-- <div class="accordion filter__accordion">
         <div class="accordion__item filter__item open">
             <div class="accordion__header filter__header">Тип изделия</div>
             <div class="accordion__content filter__content">
@@ -79,6 +100,6 @@
                 <button class="filter__button">16 мм</button>
             </div>
         </div>
-    </div>
+    </div> -->
 
                     </form>

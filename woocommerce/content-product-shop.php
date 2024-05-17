@@ -48,7 +48,7 @@ if (is_shop()) {
                         ]);
                         foreach($terms as $subcatalog) {
         
-                            $link = get_term_link( $main_product, 'product_cat' );
+                            $link = get_term_link( $subcatalog, 'product_cat' );
                             ?>
                             <a href="<?php echo $link; ?>" class="products__item-link">
                                 <?php  echo $subcatalog->name; ?>
@@ -69,39 +69,4 @@ if (is_shop()) {
 
     </div>
     <?php 
-} elseif(is_product_category()) {
-    echo "test";
-        global $product;
-        $woocommerce_category_id = get_queried_object_id();
-        echo "tax";
-        $get_categories = get_terms('product_cat', [
-            'orderby' => 'id',
-            'order' => 'ASC',
-            'hide_empty' => 0,
-        ]);
-        // is_product_category
-        if ( is_shop() ) {
-          if ( $get_categories ) {
-            echo '<div class="">';
-                echo '<div class="subcatalog__items">';
-                foreach ( $get_categories as $term ) {
-                  echo '<div class="subcatalog__item">';
-                  echo '<div class="subcatalog__item-img">';
-                  echo '<div class="subcatalog__item-img-wrapper">';
-                  woocommerce_subcategory_thumbnail( $term );
-                  echo '</div>';
-                  echo '<a href="' .  esc_url( get_term_link( $term ) ) . '" class="subcatalog__item-href ' . $term->slug . '">';
-                  echo '</a>';
-                  echo '<p class="subcatalog__item-name">';
-                  echo $term->name;
-                  echo '</p>';
-                  echo '</div>';
-                  echo '</div>';
-              }
-              echo '</div>';
-              echo '</div>';
-    
-            }
-        }
-    
-}
+} 

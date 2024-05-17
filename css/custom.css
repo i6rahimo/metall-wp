@@ -41,6 +41,7 @@
 }
 .filter__product {
     flex-wrap: nowrap;
+    margin: 0;
 }
 
 .product__characteristics-data  a {
