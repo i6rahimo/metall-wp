@@ -1,5 +1,6 @@
 
 
+
 const accordionItems = document.querySelectorAll('.accordion__item');
 
 accordionItems.forEach((e) => {
@@ -38,5 +39,3 @@ function inputChecked() {
 }
 
 inputChecked()
-
-

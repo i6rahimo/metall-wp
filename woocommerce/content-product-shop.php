@@ -15,6 +15,7 @@ $categories = get_categories($args);
 
 
 if (is_shop()) {
+
     ?>
     <div class="catalog__products products__items">
     <?php

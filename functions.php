@@ -157,4 +157,5 @@ function true_jquery_register() {
 	}
 }
 
+
 ?>

@@ -112,3 +112,32 @@
 .popup__content-search.popup__content-search {
     margin: 120px auto 0;
 }
+
+
+.menu__list-front .menu__item .menu__link {
+    color: #fff;
+}
+
+.header-is-sticky .header .menu__link {
+    color: #000;
+}
+.header .sub-menu__list .menu__link {
+    color: #000;
+}
+.breadcrumbs {
+    margin: 75px 0 50px;
+}
+
+.menu__linkmenu__link {
+    color: #000;
+}
+
+
+.shipment__hero__container {
+    margin: 90px auto 0;
+}
+
+
+.reviews {
+    margin: 90px auto 120px;
+}

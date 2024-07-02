@@ -22,21 +22,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! empty( $breadcrumb ) ) {
 
-
 	echo $wrap_before;
-
 	echo "<div class='breadcrumbs'>";
 	echo "<div class='breadcrumbs__container'>";
 	echo "<ul class='breadcrumbs__ul'>";
 	foreach ( $breadcrumb as $key => $crumb ) {
 		echo $before;
 		echo '<li class="breadcrumbs__li">';
-		
 		if ( ! empty( $crumb[1] ) && sizeof( $breadcrumb ) !== $key + 1 ) {
+			if($crumb[0] === 'Home') {
+				$crumb[0] = 'Главная';
+				
+			}
+			echo ' <a class="breadcrumbs__link" href="' . esc_url( $crumb[1] ) . '">' . esc_html( $crumb[0] ) . '</a>';
 
-			echo '
-				<a class="breadcrumbs__link" href="' . esc_url( $crumb[1] ) . '">' . esc_html( $crumb[0] ) . '</a>
-			';
 
 		} else {
 			echo esc_html( $crumb[0] );

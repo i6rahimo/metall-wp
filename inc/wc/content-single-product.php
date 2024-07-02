@@ -298,6 +298,7 @@ function main_class_after_content()
 {
 	echo "</main>";
 }
-
-remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar');
+if(is_product()) {
+	remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar');
+}
 ?>

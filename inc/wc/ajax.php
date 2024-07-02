@@ -6,7 +6,7 @@ add_action('wp_ajax_search_action', 'esp_search_ajax_action_callback');
 add_action('wp_ajax_nopriv_search_action', 'esp_search_ajax_action_callback');
 
 function esp_search_ajax_action_callback(){
-	
+
 	if (!wp_verify_nonce($_POST['nonce'], 'search-nonce')){
 		wp_die('Данные отправлены с левого адреса');
 	}
@@ -31,3 +31,17 @@ function esp_search_ajax_action_callback(){
 	wp_die();
 }
 
+
+
+add_action('wp_ajax_filter_action', 'my_filter_action');
+add_action( 'wp_ajax_nopriv_filter_action', 'my_filter_action' );
+function my_filter_action() {
+
+	$link = ! empty( $_POST['product'] ) ? esc_attr( $_POST['product'] ) : false;
+	$slug = $link ? wp_basename( $link ) : false;
+	$cat  = get_category_by_slug( $slug );
+
+	echo $cat;
+
+	wp_die();
+}

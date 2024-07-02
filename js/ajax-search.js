@@ -26,3 +26,32 @@ jQuery(function ($) {
     });
 });
 
+
+jQuery(function($) {
+    $product_wrapper = $('.filter__products');
+
+    $('.filter__button').click(function(e) {
+        e.preventDefault();
+        
+        var linkCat = $(this).attr('href');
+        var titleCat = $(this).text();
+
+        document.title = titleCat;
+        history.pushState({page_title: titleCat}, titleCat, linkCat);
+
+        // ajaxCat(linkCat);
+    })
+    let datas = {
+        action: 'filter_action',
+        whatever: 123,
+    }
+
+    $.ajax({
+        url: filter.url,
+        data: datas,
+        type: 'GET',
+        succes: function (res) {
+            console.log(res);
+        }
+    })
+})

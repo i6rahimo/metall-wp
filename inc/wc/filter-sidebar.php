@@ -1,7 +1,3 @@
-
-
-
-
 <div class="filter__mobile" data-type="popup-5">
     <p class="filter__mobile-text">Фильтры</p>
     <div class="filter__mobile-arrow">
@@ -17,89 +13,46 @@
             <div class="accordion__header filter__header">Производитель</div>
             <div class="accordion__content filter__content open">
                 <?php
-                    $attributes_tax_slugs = array_keys( wp_list_pluck( wc_get_attribute_taxonomies(), 'attribute_label', 'attribute_name' ) );
 
-                    if ( $attribute_taxonomies = wc_get_attribute_taxonomies() ) {
-                        foreach ( $attribute_taxonomies as $tax ) {
-                            if ( $name = wc_attribute_taxonomy_name( $tax->attribute_name ) ) {
+                $args = get_terms([
+                    'taxonomy' => 'product_tag',
+                    'hide_empty' => false,
+                ]);
 
-                                $label = ! empty( $tax->attribute_label ) ? $tax->attribute_label : $tax->attribute_name;
+                $test = get_terms([
+                    'taxonomy' => 'pa_color',
+                    'hide_empty' => false,
 
-                                $wc_product_attributes[ $name ] = $tax; // used as a global elsewhere
-                                
-                                register_taxonomy( 
-                                    $name,
-                                    apply_filters( 'woocommerce_taxonomy_objects_' . $name, array( 'product' ) ),
-                                    apply_filters( 'woocommerce_taxonomy_args_' . $name, array(/* … sane defaults … */) )
-                                );
-                                
-                            }
-                        }
-                    }
-                    $args = get_terms([
-                        'taxonomy' => 'product_tag',
-                        'hide_empty' => false,
-                    ]);        
-             
-                    foreach($attributes_tax_slugs as $item):
-         
-                        ?>
-                            <!-- <label class="filter__label" for="<?php echo $item->term_id?>">    
-                                <input type="checkbox" name="<?php echo $item->taxonomy; ?>" value="<?php echo $item->slug; ?>" <?php checked( $checked ); ?>/>
-                                <button><?php echo $item->name; ?></button>
-                            </label> -->
-                            <a href="<?php echo $item ?>" class="filter__button"><?php echo $item ?></a>
-                        <?php
-                    endforeach
-                ?>
-                <button class="filter__button">ММК</button>
-                <button class="filter__button">ЧМК</button>
-                <button class="filter__button">Северсталь</button>
-                <button class="filter__button">Мечел</button>
-                <button class="filter__button">НМЛК</button>
-                <button class="filter__button active">Борский трубный завод</button>
-                <button class="filter__button">Евраз Холдинг</button>
-            </div>
-        </div>
-    </div>
+                ]);
+                $tt = wc_get_attribute_taxonomies();
+                var_dump( $tt);
+                global $wc_product_attributes;
+                foreach($wc_product_attributes as $tes) {
+                    // print_r($tes);
+                }
 
-    <!-- <div class="accordion filter__accordion">
-        <div class="accordion__item filter__item open">
-            <div class="accordion__header filter__header">Тип изделия</div>
-            <div class="accordion__content filter__content">
-                <button class="filter__button">Арматура рифленая (А3)</button>
-                <button class="filter__button">Арматура гладкая (А1)</button>
-                <button class="filter__button">Круг стальной</button>
+                foreach ($args as $item):
+                    ?>
+                    <a href="?product_tag=<?php echo $item->slug ?>" class="filter__button"><?php echo $item->name; ?></a>
+                    <?php
+                    // if ((is_product_category() || is_shop()) && $query->is_main_query()) {
+                        // тут можно изъять из URL параметры фильтрации по собственной схеме
+                        
+                        // $tax_query = (array) $query->get('tax_query');
+                        // $tax_query[] = array(
+                        //     'taxonomy' => 'pa_SOME_ATTRIBUTE',
+                        //     'field' => 'slug',
+                        //     'terms' => array('SOME_ATTRIBUTE_VALUE_SLUG'),
+                        //     'operator' => 'IN'
+                        // );
+
+                        // $query->set('tax_query', $tax_query);
+                    
+                endforeach ?>
+
             </div>
         </div>
     </div>
 
 
-    <div class="accordion filter__accordion">
-        <div class="accordion__item filter__item open">
-            <div class="accordion__header filter__header">Материал</div>
-            <div class="accordion__content filter__content">
-                <button class="filter__button">35ГС</button>
-                <button class="filter__button">25Г2С</button>
-                <button class="filter__button">А500С</button>
-                <button class="filter__button">А500СП</button>
-                <button class="filter__button">А400С</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="accordion filter__accordion open">
-        <div class="accordion__item filter__item open">
-            <div class="accordion__header filter__header open">Размер</div>
-            <div class="accordion__content filter__content">
-                <button class="filter__button">6 мм</button>
-                <button class="filter__button">8 мм</button>
-                <button class="filter__button">10 мм</button>
-                <button class="filter__button">12 мм</button>
-                <button class="filter__button">14 мм</button>
-                <button class="filter__button">16 мм</button>
-            </div>
-        </div>
-    </div> -->
-
-                    </form>
+</form>
